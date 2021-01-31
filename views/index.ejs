@@ -1,0 +1,95 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+  <%include ./partials/head.ejs%>
+    <style>
+      .modal {
+        display: block !important;
+        z-index: 9999 !important;
+        backdrop-filter: blur(14px) grayscale(0.6) opacity(12);
+      }
+
+      /* .modal-open body{
+            display: block !important;
+            z-index: 1000px;
+
+            backdrop-filter: blur(4px) grayscale(0.6) opacity(2);
+        } */
+    </style>
+</head>
+
+<body  ng-cloak ng-app="manageUsers" ng-controller="manageUsersController" ng-init="init()">
+  <!-- Left Panel -->
+  <%include ./partials/sidemenu.ejs%>
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+      <!-- Header-->
+      <%include ./partials/header.ejs%>
+        <!-- /#header -->
+        <!-- Content -->
+        <div class="content">
+          <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <strong class="card-title">Basic Table</strong>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col text-right">
+                        <button class="btn btn-success" ng-click="openModal('create')"><i class="fa fa-plus"></i>
+                          Add</button>
+                      </div>
+                    </div>
+                    <div class="table-responsive mt-4">
+                      <table class="table table-bordered table-striped text-center text-nowrap">
+                        <thead class="bg-dark text-white">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="user in users track by $index">
+                            <th>{{$index + 1}}</th>
+                            <td>{{user.firstName + " " + user.lastName}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.contact}}</td>
+                            <td>
+                              <button class="btn btn-warning text-white" ng-click="openModal('edit', user, $index)"><i class="fa fa-edit"></i></button>
+                              <button class="btn btn-danger text-white" ng-click="deleteUser(user._id, $index)"><i class="fa fa-trash"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.content -->
+          <div class="clearfix"></div>
+          <!-- Footer -->
+          <%include ./partials/footer.ejs%>
+            <!-- /.site-footer -->
+        </div>
+        <!-- /#right-panel -->
+        <%include ./modal.ejs%>
+          <%include ./partials/bodyScripts.ejs%>
+            <script src="/assets/ngapps/manageUsers.js"></script>
+
+</body>
+
+</html>
